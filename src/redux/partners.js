@@ -1,8 +1,27 @@
-import { PARTNERS } from '../shared/partners';
+// import { PARTNERS } from '../shared/partners';
 
-export const Partners = (state = PARTNERS, action) => {
-    switch (action.type) {
-        default:
-            return state;
-    }
+// export const Partners = (state = PARTNERS, action) => {
+//     switch (action.type) {
+//         default:
+//             return state;
+//     }
+// }
+import * as ActionTypes from './ActionTypes';
+
+export const Partners = (state = { isLoading: true,
+    errMess: null,
+    partners: [] }, action) => {
+switch (action.type) {
+case ActionTypes.ADD_PARTNER:
+return {...state, isLoading: false, errMess: null, partners: action.payload};
+
+case ActionTypes.PARTNERS_LOADING:
+return {...state, isLoading: true, errMess: null, partners: []}
+
+case ActionTypes.PARTNERS_FAILED:
+return {...state, isLoading: false, errMess: action.payload};
+
+default:
+return state;
 }
+};

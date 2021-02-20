@@ -1,12 +1,15 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { baseUrl } from '../shared/baseUrl';
+import { Loading } from './LoadingComponent';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 function RenderPartner({partner}) {
     if (partner) {
         return (
             <React.Fragment>
-                <Media object src={partner.image} alt={partner.name} width="150" />
+                <Media object src={baseUrl} alt={partner.name} width="150" />
                 <Media body className="ml-5 mb-4">
                     <Media heading>{partner.name}
                         
@@ -18,9 +21,7 @@ function RenderPartner({partner}) {
     }
     return <div />
 }
-
-function About(props) {
-
+function PartnerList(props) {
     const partners = props.partners.map(partner => {
         console.log(partner)
         return (
@@ -30,6 +31,20 @@ function About(props) {
          </Media>
         );
     });
+    if (props.partners.isLoading) {
+        <Loading />
+    } else if (props.partners.errMess) {
+        return <h4>{props.partners.errMess}</h4>;
+   
+    } 
+    return (
+        <div className="col mt-4">{partners}</div>
+    )
+   
+    
+}
+function About(props) {
+
 
     return (
         <div className="container">
@@ -84,9 +99,7 @@ function About(props) {
                     <h3>Community Partners</h3>
                 </div>
                 <div className="col mt-4">
-                    <Media list>
-                        {partners}
-                    </Media>
+                    <PartnerList partners={props.partners} />
                 </div>
             </div>
         </div>
