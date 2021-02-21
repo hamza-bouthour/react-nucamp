@@ -16,78 +16,28 @@ class Contact extends Component  {
     constructor(props) {
         super(props);
 
-        this.state = {
-            firstName: '',
-            lastName: '',
-            phoneNum: '',
-            email: '',
-            agree: false,
-            contactType: 'By Phone',
-            feedback: '',
-            touched: {
-                firstName: false,
-                lastName: false,
-                phoneNum: false,
-                email: false
-            }
-        }
-
-        // this.handleInputChange = this.handleInputChange.bind(this);
-        // this.handleSubmit = this.handleSubmit.bind(this);
+        // this.state = {
+        //     firstName: '',
+        //     lastName: '',
+        //     phoneNum: '',
+        //     email: '',
+        //     agree: false,
+        //     contactType: 'By Phone',
+        //     feedback: '',
+        //     touched: {
+        //         firstName: false,
+        //         lastName: false,
+        //         phoneNum: false,
+        //         email: false
+        //     }
+        // };
     }
-
-    // handleInputChange(event) {
-    //     const target = event.target;
-    //     const name = target.name;
-    //     const value = target.type === 'checkbox' ? target.checked : target.value;
-    
-    //     this.setState({
-    //         [name]: value
-    //     });
-    // }
 
     handleSubmit(values) {
-        console.log('Current State is: ' + JSON.stringify(values));
-        alert('Current State is: ' + JSON.stringify(values));
-        this.props.resetFeedbackForm();
+        this.props.postFeedback(values);
     }
-    // handleBlur = (field) => () => {
-    //     this.setState({
-    //         touched: {...this.state.touched, [field]: true}
-    //     })
-    // }
-    // validate(firstName, lastName, phoneNum, email) {
-    //     const errors = {
-    //         firstName: '',
-    //         lastname: '',
-    //         phoneNum: '',
-    //         email: ''
-    //     }
-    //     if (this.state.touched.firstName) {
-    //         if (firstName.length < 2) {
-    //             errors.firstName = 'First name must be at least 2 caracters.';
-    //         } else if (firstName.length > 15) {
-    //             errors.firstName = 'First name must be 15 or less caracters.';
-    //         }
-    //     }
-    //     if (this.state.touched.lastName) {
-    //         if (lastName.length < 2) {
-    //             errors.lastname = 'Last name must be at least 2 caracters.';
-    //         } else if (lastName.length > 15) {
-    //             errors.lastname = 'Last name must be 15 or less caracters.';
-    //         }
-    //     }
-    //     const reg = /^\d+$/;
-    //     if (this.state.touched.phoneNum && !reg.test(phoneNum)) {
-    //         errors.phoneNum = 'The phone number should contain only numbers.'
-    //     }
-    //     if (this.state.touched.phoneNum && !email.includes("@")) {
-    //         errors.email = 'Email should contain a @.'
-    //     }
-    //     return errors;
-    // }
+
     render () {
-        // const errors = this.validate(this.state.firstName, this.state.lastName, this.state.phoneNum, this.state.email)
         return (
             <div className="container">
                 <div className="row">

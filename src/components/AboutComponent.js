@@ -1,15 +1,14 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { baseUrl } from '../shared/baseUrl';
 import { Loading } from './LoadingComponent';
-import { FadeTransform, Fade, Stagger } from 'react-animation-components';
+import { FadeTransform, Stagger } from 'react-animation-components';
 
 function RenderPartner({partner}) {
     if (partner) {
         return (
             <React.Fragment>
-                <Media object src={baseUrl} alt={partner.name} width="150" />
+                <Media object src={partner.image} alt={partner.name} width="150" />
                 <Media body className="ml-5 mb-4">
                     <Media heading>{partner.name}
                         
@@ -21,14 +20,24 @@ function RenderPartner({partner}) {
     }
     return <div />
 }
+
 function PartnerList(props) {
     const partners = props.partners.map(partner => {
         console.log(partner)
         return (
-         <Media tag="li" key={partner.id}>
-            {RenderPartner({partner})}
             
-         </Media>
+            <FadeTransform key={partner.id}
+                in
+                transformProps={{
+                    exitTransform: 'scale(0.5) translateY(-50%)'
+                }}>
+       
+                    <Media tag="li">
+                        {RenderPartner({partner})}
+                        
+                    </Media>   
+             
+            </FadeTransform>
         );
     });
     if (props.partners.isLoading) {
@@ -38,14 +47,15 @@ function PartnerList(props) {
    
     } 
     return (
+        <Stagger in>
+
         <div className="col mt-4">{partners}</div>
-    )
-   
+        </Stagger>
     
+    ) 
 }
+
 function About(props) {
-
-
     return (
         <div className="container">
             <div className="row">
@@ -99,7 +109,11 @@ function About(props) {
                     <h3>Community Partners</h3>
                 </div>
                 <div className="col mt-4">
-                    <PartnerList partners={props.partners} />
+                        <Stagger in>
+                        {
+                            <PartnerList partners={props.partners} />
+                        }
+                        </Stagger>       
                 </div>
             </div>
         </div>
