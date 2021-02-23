@@ -36,9 +36,10 @@ const mapStateToProps = state => {
 class Main extends Component {
 
     componentDidMount() {
-        this.props.fetchCampsites()
-        this.props.fetchPartners()
-        this.props.fetchPromotions()
+        this.props.fetchCampsites();
+        this.props.fetchPartners();
+        this.props.fetchPromotions();
+        this.props.fetchComments();
     }
 
     render() {
@@ -80,7 +81,7 @@ class Main extends Component {
                                 <Route exact path='/directory' render={() => <Directory campsites={this.props.campsites} />} />
                                 <Route path='/directory/:campsiteId' component={CampsiteWithId} />
                             <Route exact path='/contactus' render={() => <Contact resetFeedbackForm={this.props.resetFeedbackForm} postFeedback={this.props.postFeedback}/> } />
-                                <Route exact path='/aboutus' render={() => <About partners={this.props.partners.partners} /> } />
+                                <Route exact path='/aboutus' render={() => <About partners={this.props.partners} /> } />
                                 <Redirect to='/home' />
                             </Switch>
                         </CSSTransition>

@@ -1,5 +1,4 @@
 import * as ActionTypes from './ActionTypes';
-import { CAMPSITES } from '../shared/campsites';
 import { baseUrl } from '../shared/baseUrl';
 
 export const addComment = comment => ({
@@ -41,12 +40,12 @@ export const postComment = (campsiteId, rating, author, text) => dispatch => {
             alert('Your comment could not be posted\nError: ' + error.message);
         });
 };
-export const postFeedback = (feedback)   => {
+export const postFeedback = (feedback)   => dispatch => {
         const feedbackAlert = {
-            feedback,
+            feedback: feedback
         }
 
-      fetch(baseUrl + 'feedback', {
+  return fetch(baseUrl + 'feedback', {
             method: "POST",
             body: JSON.stringify(feedbackAlert),
             headers: {
@@ -66,12 +65,13 @@ export const postFeedback = (feedback)   => {
         )
         .then(response => response.json())
 
-        .then(response => alert(`Thank you for your feedback! ${JSON.stringify(response)}`))
+
+        .then(response => dispatch(alert(`Thank you for your feedback! ${JSON.stringify(response)}`)))
         .catch(error => {
             console.log('post comment', error.message);
             alert('Your comment could not be posted\nError: ' + error.message);
         });
-        return ({type: ActionTypes.POST_FEEDBACK})
+    
 
 };
 
@@ -140,6 +140,7 @@ export const fetchPromotions = () => dispatch => {
         .catch(error => dispatch(promotionsFailed(error.message)));
 };
 export const fetchPartners = () => dispatch => {
+    dispatch(partnersLoading());
     return fetch(baseUrl + 'partners')
         .then(response => {
                 if (response.ok) {

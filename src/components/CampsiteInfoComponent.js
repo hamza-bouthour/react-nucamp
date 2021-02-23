@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { Card, CardImg, CardText, CardBody, Breadcrumb, BreadcrumbItem, Modal, Button, ModalHeader, ModalBody, ModalFooter, Row, Col, Label} from "reactstrap";
+import { Card, CardImg, CardText, CardBody, Breadcrumb, BreadcrumbItem, Modal, Button, ModalHeader, ModalBody, Label} from "reactstrap";
 import { Link } from 'react-router-dom';
-// import ModalHeader from "reactstrap/lib/ModalHeader";
 import { Loading } from './LoadingComponent';
-import { Control, LocalForm, Errors, option } from 'react-redux-form';
+import { Control, LocalForm, Errors } from 'react-redux-form';
 import { baseUrl } from '../shared/baseUrl';
 import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 

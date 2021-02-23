@@ -3,12 +3,13 @@ import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'r
 import { Link } from 'react-router-dom';
 import { Loading } from './LoadingComponent';
 import { FadeTransform, Stagger } from 'react-animation-components';
+import { baseUrl } from '../shared/baseUrl';
 
 function RenderPartner({partner}) {
     if (partner) {
         return (
             <React.Fragment>
-                <Media object src={partner.image} alt={partner.name} width="150" />
+                <Media object src={baseUrl + partner.image} alt={partner.name} width="150" />
                 <Media body className="ml-5 mb-4">
                     <Media heading>{partner.name}
                         
@@ -22,8 +23,10 @@ function RenderPartner({partner}) {
 }
 
 function PartnerList(props) {
-    const partners = props.partners.map(partner => {
+    const partners = props.partners.partners.map(partner => {
         console.log(partner)
+
+        
         return (
             
             <FadeTransform key={partner.id}
@@ -33,7 +36,7 @@ function PartnerList(props) {
                 }}>
        
                     <Media tag="li">
-                        {RenderPartner({partner})}
+                        <RenderPartner partner={partner}/>
                         
                     </Media>   
              
@@ -43,7 +46,11 @@ function PartnerList(props) {
     if (props.partners.isLoading) {
         <Loading />
     } else if (props.partners.errMess) {
-        return <h4>{props.partners.errMess}</h4>;
+        return (
+            <div className="col">
+                <h4>{props.partners.errMess}</h4>
+            </div>
+        );
    
     } 
     return (
